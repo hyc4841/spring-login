@@ -14,7 +14,7 @@ public class MemberRepository { // Member를 저장하고 관리하는 곳. 인�
     private static long sequence = 0L; // static 사용
 
     public Member save(Member member) {
-        member.setId(++sequence);
+        member.setId(++sequence); // id는 자동으로 하나씩 올라가게 설계함.
         log.info("save : member={}", member);
         store.put(member.getId(), member);
         return member;
