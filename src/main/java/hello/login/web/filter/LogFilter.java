@@ -21,13 +21,13 @@ public class LogFilter implements Filter {
         log.info("log filter doFilter");
 
         HttpServletRequest httpRequest = (HttpServletRequest) request; // ServletRequest는 인터페이스 여서 자체에는 별다른 기능이 없기 때문에 HttpServletRequest로 다운 캐스팅 해줘햐함
-        String requestURI = httpRequest.getRequestURI();
 
-        String uuid = UUID.randomUUID().toString();
+        String requestURI = httpRequest.getRequestURI(); // 요청 URI
+        String uuid = UUID.randomUUID().toString();     // 요청 구분용 UUID
 
         try {
             log.info("REQUEST [{}][{}]", uuid, requestURI);
-            filterChain.doFilter(request, response);
+            filterChain.doFilter(request, response); // 다음 필터 있으면 다음 필터 호출, 없으면 서블릿 호출
         } catch (Exception e) {
             throw e;
         } finally {

@@ -16,7 +16,7 @@ import javax.servlet.Filter;
 import java.util.List;
 
 @Configuration
-public class WebConfig implements WebMvcConfigurer {
+public class WebConfig implements WebMvcConfigurer { // WebMvcConfigurer 인터셉터를 등록해주기 위해 상속 받아야함.
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
@@ -28,7 +28,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(new LogIntercepter())
                 .order(1)
                 .addPathPatterns("/**") // 모든 경로 허용
-                .excludePathPatterns("/css/**", "/*.ico", "/error"); //excludePathPatterns의 역할은 인터셉터를 적용하지 않을 경로를 설정하는 것.
+                .excludePathPatterns("/css/**", "/*.ico", "/error"); // 예외 경로. excludePathPatterns의 역할은 인터셉터를 적용하지 않을 경로를 설정하는 것.
 
         registry.addInterceptor(new LoginCheckIntercepter())
                 .order(2)
@@ -38,7 +38,7 @@ public class WebConfig implements WebMvcConfigurer {
 
 //    @Bean
     public FilterRegistrationBean logFilter() {
-        FilterRegistrationBean<Filter> filterRegistrationBean = new FilterRegistrationBean<>();
+        FilterRegistrationBean<Filter> filterRegistrationBean = new FilterRegistrationBean<>(); // FilterRegistrationBean은 순서 조절이 가능
         filterRegistrationBean.setFilter(new LogFilter());
         filterRegistrationBean.setOrder(1);
         filterRegistrationBean.addUrlPatterns("/*");

@@ -24,26 +24,26 @@ public class ItemController {
     private final ItemRepository itemRepository;
 
     @GetMapping
-    public String items(Model model) {
+    public String items(Model model) { // 아이템 목록 보여주기
         List<Item> items = itemRepository.findAll();
         model.addAttribute("items", items);
         return "items/items";
     }
 
     @GetMapping("/{itemId}")
-    public String item(@PathVariable long itemId, Model model) {
+    public String item(@PathVariable long itemId, Model model) { // 아이템 상세 정보
         Item item = itemRepository.findById(itemId);
         model.addAttribute("item", item);
         return "items/item";
     }
 
     @GetMapping("/add")
-    public String addForm(Model model) {
-        model.addAttribute("item", new Item());
+    public String addForm(Model model) { // 아이템 추가 페이지
+        model.addAttribute("item", new Item()); // 빈 객체 전달?
         return "items/addForm";
     }
 
-    @PostMapping("/add")
+    @PostMapping("/add") // 아이템 추가
     public String addItem(@Validated @ModelAttribute("item") ItemSaveForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
         //특정 필드 예외가 아닌 전체 예외
@@ -71,14 +71,14 @@ public class ItemController {
         return "redirect:/items/{itemId}";
     }
 
-    @GetMapping("/{itemId}/edit")
+    @GetMapping("/{itemId}/edit") // 아이템 수정 페이지
     public String editForm(@PathVariable Long itemId, Model model) {
         Item item = itemRepository.findById(itemId);
         model.addAttribute("item", item);
         return "items/editForm";
     }
 
-    @PostMapping("/{itemId}/edit")
+    @PostMapping("/{itemId}/edit") // 아이템 수정
     public String edit(@PathVariable Long itemId, @Validated @ModelAttribute("item") ItemUpdateForm form, BindingResult bindingResult) {
 
         //특정 필드 예외가 아닌 전체 예외

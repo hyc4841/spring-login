@@ -17,7 +17,7 @@ public class LoginCheckFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-
+        // request와 response를 HttpServlet으로 다운 캐스팅해서 사용한다. 기능이 더 많음.
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         String requestURI = httpRequest.getRequestURI();
 
@@ -44,7 +44,6 @@ public class LoginCheckFilter implements Filter {
         }
 
     }
-
     /**
      * 화이트 리스트의 경우 체크 X
      */

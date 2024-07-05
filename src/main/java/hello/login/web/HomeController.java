@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 
 @Slf4j
 @Controller
-@RequiredArgsConstructor
+@RequiredArgsConstructor // final이 붙은 애들의 생성자를 자동으로 만들어준다.
 public class HomeController {
 
     private final MemberRepository memberRepository;
